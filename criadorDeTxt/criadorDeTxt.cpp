@@ -23,6 +23,7 @@ void edit() {
 	if (fs::exists(mainPath))
 	{
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		string newContent;
 		string nameEdit;
 		string line;
 		cout << "Digite o nome do arquivo que deseja editar(sem .txt): \n";
@@ -31,10 +32,28 @@ void edit() {
 		
 		if (in_file)
 		{
+			
+
 			getline(in_file, line);
 			in_file >> line;
-			cout << line;
-			cout << "No arquivo";
+			cout << "Conteudo escrito: " << endl;
+			cout << "'" << line << "'" << endl;
+
+			cout << "\n" << "digite o novo conteudo do arquivo: ";
+			getline(cin, newContent);
+
+			if (newContent != "")
+			{
+				ofstream streamEdit(mainPath + nameEdit + ".txt");
+
+				if (streamEdit.is_open())
+				{
+					streamEdit << newContent;
+					streamEdit.close();
+					in_file.close();
+					cout << "\n" << "Arquivo criado com sucesso!";
+				}
+			}
 		}
 	}
 }
