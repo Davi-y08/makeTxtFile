@@ -3,6 +3,7 @@
 #include <fstream>
 #include <filesystem>
 #include <stdio.h>
+#include <conio.h>
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -32,8 +33,6 @@ void edit() {
 		
 		if (in_file)
 		{
-			
-
 			getline(in_file, line);
 			in_file >> line;
 			cout << "Conteudo escrito: " << endl;
@@ -51,7 +50,8 @@ void edit() {
 					streamEdit << newContent;
 					streamEdit.close();
 					in_file.close();
-					cout << "\n" << "Arquivo criado com sucesso!";
+					cout << "Arquivo criado com sucesso!";
+					system("clear");
 				}
 			}
 		}
@@ -134,17 +134,24 @@ void create() {
 
 int main()
 {	
+	int numeros;
 	int opt;
-	cout << "Type a option: 1 - Create, 2 - delete, 3 - edit, 4 - exit: ";
-	cin >> opt;
-	
-	switch (opt)
-	{
-	case 1:
-		create();
-	case 2:
-		deleteArch();
-	case 3: 
-		edit();
-	}
+		cout << "\n Type a option: \n 1 - Create \n 2 - Edit \n 3 - Edit \n 4 - Exit \n:";
+		cin >> opt;
+		switch (opt)
+		{
+		case 1:
+			create();
+			main();
+		case 2:
+			edit();
+			main();
+		case 3:
+			deleteArch();
+			main();
+		case 4:
+			EXIT_SUCCESS;
+		default:
+			cout << "digite uma entrada válida: ";
+		}	
 }
