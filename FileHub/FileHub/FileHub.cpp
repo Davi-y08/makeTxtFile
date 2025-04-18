@@ -15,6 +15,10 @@ vector<string> porcentagem(string pathAnalyse) {
     fs::recursive_directory_iterator end;
     vector<string> extensoes;
     vector<int> quantidades;
+    vector<string> extensoesInuteis = { ".tmp", ".log", ".bak", ".old", ".dmp", ".swp", ".swo", ".~",
+        ".class", ".obj", ".o", ".pyc", ".pyo", ".cache", ".temp", ".aux",
+        ".DS_Store", "Thumbs.db" };
+
     for (fs::recursive_directory_iterator i(pathForAnalyse); i != end; i++) 
     {
         fs::path pathAtual = i->path();
@@ -22,6 +26,7 @@ vector<string> porcentagem(string pathAnalyse) {
          if (pathAtual.has_extension()){
 
              string extensao = pathAtual.extension().string();
+             string nomeArquivo = pathAtual.filename().string();
              bool Notexists = true;
 
              for (int j = 0; j < extensoes.size(); ++j) {
@@ -38,6 +43,13 @@ vector<string> porcentagem(string pathAnalyse) {
                  quantidades.push_back(1);
              }
 
+             for (const auto& lixo : extensoesInuteis) {
+                 if (extensao == lixo || nomeArquivo == lixo) {
+                     fs::remove(pathAtual);
+                     break;
+                 }
+             }
+
         }
     }
 
@@ -45,8 +57,8 @@ vector<string> porcentagem(string pathAnalyse) {
 }
 
 int main()
-{
-    string caminho = "C:\\Users\\oisyz\\OneDrive\\Desktop";
+{\
+    string caminho = "C:\\Users\\oisyz\\OneDrive\\Documentos";
     vector<string> extensoes = porcentagem(caminho);
     
     for (string item : extensoes) {
