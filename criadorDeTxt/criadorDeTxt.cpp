@@ -31,12 +31,15 @@ void edit() {
 		getline(cin, nameEdit);
 		in_file.open(mainPath + nameEdit + ".txt");
 		
-		if (in_file)
+		if (in_file.is_open())
 		{
-			getline(in_file, line);
-			in_file >> line;
+			
 			cout << "Conteudo escrito: " << endl;
-			cout << "'" << line << "'" << endl;
+
+			while (getline(in_file, line)) {
+				cout << line << endl;
+			}
+
 
 			cout << "\n" << "digite o novo conteudo do arquivo: ";
 			getline(cin, newContent);
@@ -51,7 +54,7 @@ void edit() {
 					streamEdit.close();
 					in_file.close();
 					cout << "Arquivo criado com sucesso!";
-					system("clear");
+					system("cls");
 				}
 			}
 		}
@@ -104,7 +107,7 @@ void deleteArch() {
 	else
 	{
 		remove(pathDelete);
-		cout << "Arquivo deletado com sucesso";
+		cerr << "Arquivo deletado com sucesso";
 	}
 }
 
@@ -136,7 +139,7 @@ int main()
 {	
 	int numeros;
 	int opt;
-		cout << "\n Type a option: \n 1 - Create \n 2 - Edit \n 3 - Edit \n 4 - Exit \n:";
+		cout << "Type a option: \n 1 - Create \n 2 - Edit \n 3 - Delete \n 4 - Exit";
 		cin >> opt;
 		switch (opt)
 		{
@@ -152,6 +155,6 @@ int main()
 		case 4:
 			EXIT_SUCCESS;
 		default:
-			cout << "digite uma entrada válida: ";
+			cerr << "digite uma entrada válida: ";
 		}	
 }
