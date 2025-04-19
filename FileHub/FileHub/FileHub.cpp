@@ -65,5 +65,14 @@ int main()
         cout << item << ", ";
     }
 
+    vector<string> extensoesApos = porcentagem(caminho);
+
+    cout << "\n" << "Apos a limpeza: ";
+
+    for (string item : extensoesApos) {
+        
+        cout << item << ", ";
+    }
+
     return 0;
 }
